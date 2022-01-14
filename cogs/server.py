@@ -12,7 +12,7 @@ from cogs.helpers import helpers
 BOT_TEST = 931523862443724830
 BOT_LOGS = 931523901731799080
 GUILD_ID = 887186488847138837
-botID = 
+botID = 931592628640813177
 
 class server(commands.Cog):
 
