@@ -4,11 +4,28 @@ from asyncio import sleep
 from discord.utils import get
 from cogs.helpers import helpers
 
-BOT_TEST = 749473757843947671
-BOT_LOGS = 786084620944146504
-GUILD_ID = 742797665301168220
+BOT_TEST = 931523862443724830
+BOT_LOGS = 931523901731799080
+GUILD_ID = 887186488847138837
 
+def stream(inp):
+    if inp == 'ECE':
+        return "ECE"
+    elif inp == 'CS':
+        return "CSE"
+    elif inp == "ME":
+        return "Mech"
+    elif inp == "BT":
+        return "Biotech"
+    else:
+        return "Everyone Else"
 
+def campus(inp):
+    if inp == "PES University (Ring Road)":
+        return "RR Campus"
+    else:
+        return "EC Campus"
+    
 class verification(commands.Cog):
 
     def __init__(self, client):
@@ -50,12 +67,12 @@ class verification(commands.Cog):
     def load_roles(self):
         try:
             self.guildObj = self.client.get_guild(GUILD_ID)
-            self.admin = get(self.guildObj.roles, id=742800061280550923)
-            self.mods = get(self.guildObj.roles, id=742798158966292640)
-            self.bot_devs = get(self.guildObj.roles, id=750556082371559485)
-            self.just_joined = get(self.guildObj.roles, id=798765678739062804)
-            self.verified = get(self.guildObj.roles, id=749683320941445250)
-            self.senior = get(self.guildObj.roles, id=802008729191972905)
+            self.admin = get(self.guildObj.roles, id=887323105905745980)
+            self.mods = get(self.guildObj.roles, id=887368912860241950)
+            self.bot_devs = get(self.guildObj.roles, id=523340943437594624)
+            self.just_joined = get(self.guildObj.roles, id=931524531691069480)
+            self.verified = get(self.guildObj.roles, id=931525247079960606)
+            self.senior = get(self.guildObj.roles, id=887366779880501250)
         except:
             pass
         
@@ -66,7 +83,7 @@ class verification(commands.Cog):
         success = discord.Embed(title="Sucess", color=0x00FF00)
         fail = discord.Embed(title="Fail", color=0x0FF0000)
         veri = discord.Embed(title="Verification", description="SRN & PRN/Section Verification Process", color=0x0000FF)
-        veri.add_field(name="Process", value="1. Enter SRN (PES1UG19.....) as argument\n2. Enter PRN (PES12019.....) or section as text when prompted by the bot")
+        veri.add_field(name="Process", value="1. Enter SRN (PES1UG19.....) as argument\n2. Enter PRN (PES12019.....) or section as text when prompted by the bot\n3. If fresher, enter PRN first. :kekw:")
         
         user = ctx.author
 
@@ -104,7 +121,7 @@ class verification(commands.Cog):
         elif('no match' in dat):
             fail.add_field(name="wrong SRN/PRN", value=f"{SRN} not matching the pattern")
             await ctx.channel.send(f"{user.mention}", embed=fail)
-            await ctx.channel.send("`Note: The entered SRN/PRN isn't matching any set of values in our database. Do ping @Bot Dev or @Admin to let them know of the issue`")
+            await ctx.channel.send("`Note: The entered SRN/PRN isn't matching any set of values in our database. Do ping @alphadelta1803 to let him know of the issue`")
             return
 
         else: # when valid creds are returned from the batch list
@@ -121,16 +138,36 @@ class verification(commands.Cog):
                     return
                 
                 if dat[2] == 'Sem-1':
-                    role_str = dat[-2] + '(Kid)'
+                    # role_str = dat[-2] + '(Kid)'
+                    role_str = "Fresher"
+                    str_rl = stream(dat[-2])
+                    camp_rl = campus(dat[-1])
                     try:
                         role = get(user.guild.roles, name=role_str)
+                        st_role = get(user.guild.roles, name=str_rl)
+                        cp_role = get(user.guild.roles, name=camp_rl)
                         await user.add_roles(role)
+                        await user.add_roles(st_role)
+                        await user.add_roles(cp_role)
                     except Exception as e:
                         print(e)
                         await ctx.channel.send(f"{user.mention} Looks like your role isn't on the server yet. DM or tag {self.admin.mention}")
                         return
                 if dat[2] == 'Sem-7':
                     await user.add_roles(self.senior)
+                    str_rl = stream(dat[-2])
+                    camp_rl = campus(dat[-1])
+                    try:
+                        role = get(user.guild.roles, name=role_str)
+                        st_role = get(user.guild.roles, name=str_rl)
+                        cp_role = get(user.guild.roles, name=camp_rl)
+                        await user.add_roles(role)
+                        await user.add_roles(st_role)
+                        await user.add_roles(cp_role)
+                    except Exception as e:
+                        print(e)
+                        await ctx.channel.send(f"{user.mention} Looks like your role isn't on the server yet. DM or tag {self.admin.mention}")
+                        return
 
             else:
                 await ctx.channel.send(f"{user.mention}, now enter PRN to complete verification")
@@ -143,9 +180,35 @@ class verification(commands.Cog):
                     return
 
                 if(dat[2] == 'Sem-5'):
-                    role_str = (dat[-3].replace('Campus', '').replace(' ', '').replace('BIOTECHNOLOGY','BT'))
+                    role_str = "Seniors"
+                    str_rl = stream(dat[-2])
+                    camp_rl = campus(dat[-1])
+                    try:
+                        role = get(user.guild.roles, name=role_str)
+                        st_role = get(user.guild.roles, name=str_rl)
+                        cp_role = get(user.guild.roles, name=camp_rl)
+                        await user.add_roles(role)
+                        await user.add_roles(st_role)
+                        await user.add_roles(cp_role)
+                    except Exception as e:
+                        print(e)
+                        await ctx.channel.send(f"{user.mention} Looks like your role isn't on the server yet. DM or tag {self.admin.mention}")
+                        return
                 elif(dat[2] == 'Sem-3'):
-                    role_str = dat[-2] + '(Junior)'
+                    role_str = "Seniors"
+                    str_rl = stream(dat[-2])
+                    camp_rl = campus(dat[-1])
+                    try:
+                        role = get(user.guild.roles, name=role_str)
+                        st_role = get(user.guild.roles, name=str_rl)
+                        cp_role = get(user.guild.roles, name=camp_rl)
+                        await user.add_roles(role)
+                        await user.add_roles(st_role)
+                        await user.add_roles(cp_role)
+                    except Exception as e:
+                        print(e)
+                        await ctx.channel.send(f"{user.mention} Looks like your role isn't on the server yet. DM or tag {self.admin.mention}")
+                        return
                 # elif(dat[2] == 'Sem-1'):
                 #     role_str = dat[-2] + '(Kid)'
 
