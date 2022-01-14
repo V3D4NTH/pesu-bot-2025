@@ -16,9 +16,11 @@ import pytz
 from clean import *
 IST = pytz.timezone('Asia/Kolkata')
 
-
-GUILD_ID = 742797665301168220
-MOD_LOGS = 778678059879890944
+pesuID = 
+botID = 
+confessChannel = 887187527256133652
+GUILD_ID = 887186488847138837
+MOD_LOGS = 929675062242578432
 TOKEN = os.getenv('DISCORD_TOKEN')
 electiveChoiceList = []
 
@@ -27,15 +29,16 @@ class misc(commands.Cog):
 
     def __init__(self, client):
         self.client = client
-        self.purge = '`!p` or `!purge`\n!p {amount}\n\nPurges the specified number of messages(limit=1000)'
+        # self.purge = '`!p` or `!purge`\n!p {amount}\n\nPurges the specified number of messages(limit=1000)'
         self.echo = '`!e` or `!echo`\n!e {Channel mention} {Text}\n\nEchoes a message through the bot to the specified channel'
         self.mute = '`!mute`\n!mute {Member mention} {Time} {Reason: optional}\n\nMutes the user for the specified time\nLimit: 14 days'
         self.unmute = '`!unmute`\n!unmute {Member mention}\n\nUnmutes the user'
         self.lock = '`!lock`\n!lock {Channel mention} {Reason: optional}\n\nLocks the specified channel'
         self.unlock = '`!unlock`\n!unlock {Channel mention}\n\nUnlocks the specified channel'
-        self.kick = '`!kick`\n!kick {Member mention} {Reason: optional}\n\nKicks the member from the server'
+        # self.kick = '`!kick`\n!kick {Member mention} {Reason: optional}\n\nKicks the member from the server'
         self.confessions = {}
         self.mutedict = {}
+        '''
         self.electivelist = {
             "Data Analytics":"881934645468463134",
             "Internet of Things":"881934940328046642",
@@ -64,6 +67,7 @@ class misc(commands.Cog):
             "Information Theory and Coding":"881957925978005564"
         }
         self.load_elective_choices()
+        '''
         self.startTime = int(presentTime())
         self.flush_confessions.start()
         self.load_roles()
@@ -77,12 +81,12 @@ class misc(commands.Cog):
     def load_roles(self):
         try:
             self.guildObj = self.client.get_guild(GUILD_ID)
-            self.admin = get(self.guildObj.roles, id=742800061280550923)
-            self.mods = get(self.guildObj.roles, id=742798158966292640)
-            self.bot_devs = get(self.guildObj.roles, id=750556082371559485)
-            self.bots = get(self.guildObj.roles, id=746226955094851657)
-            self.pesu_bot = get(self.guildObj.roles, id=801011477851013150)
-            self.muted = get(self.guildObj.roles, id=775981947079491614)
+            self.admin = get(self.guildObj.roles, id=887323105905745980)
+            self.mods = get(self.guildObj.roles, id=887368912860241950)
+            self.bot_devs = get(self.guildObj.roles, id=523340943437594624)
+            self.bots = get(self.guildObj.roles, id=887365365213052991)
+            self.pesu_bot = get(self.guildObj.roles, id=pesuID)
+            self.muted = get(self.guildObj.roles, id=931576052092915772)
         except:
             pass
     
@@ -164,7 +168,7 @@ class misc(commands.Cog):
                     if boolean:
                         count += 1
             await ctx.channel.send(f"{str(count)} people has role {str(thisRole)}")
-
+'''
     @commands.command(aliases=['p', 'purge'])
     async def _clear(self, ctx, amt=0):
         purge_embed = discord.Embed(
@@ -179,7 +183,7 @@ class misc(commands.Cog):
             await ctx.channel.purge(limit=amt+1)
         else:
             await ctx.channel.send(f"{ctx.author.mention} You are not authorised to do that")
-
+'''
     @commands.command(aliases=['e', 'echo'])
     async def _echo(self, ctx, dest: discord.TextChannel = None, *, message: str = ''):
         echo_embed = discord.Embed(
@@ -210,11 +214,11 @@ class misc(commands.Cog):
             title="Mute", color=0x48BF91, description=self.mute)
 
         if(ctx.author.mention == member.mention):
-            mod = self.client.get_user(749484661717204992)
+            mod = self.client.get_user(botID)
         else:
             mod = ctx.author
 
-        if((self.admin in ctx.author.roles) or (self.mods in ctx.author.roles) or (mod.id == 749484661717204992)):
+        if((self.admin in ctx.author.roles) or (self.mods in ctx.author.roles) or (mod.id == botID)):
             if(member != None):
                 seconds = 0
                 if(time.lower().endswith("d")):
@@ -228,7 +232,7 @@ class misc(commands.Cog):
 
                 if((seconds <= 0) or (seconds > 1209600)):
                     await ctx.channel.send(f"{ctx.author.mention}, please enter a valid amount of time", embed=mute_help_embed)
-                elif((mod.id == 749484661717204992) and (seconds < 3600)):
+                elif((mod.id == botID) and (seconds < 3600)):
                     await ctx.channel.send(f"{ctx.author.mention}, self-mute is only for 1 hour or more")
                 else:
                     if(self.muted in member.roles):
@@ -297,7 +301,7 @@ class misc(commands.Cog):
         if((self.admin in ctx.author.roles) or (self.mods in ctx.author.roles)):
             try:
                 if(self.muted not in member.roles):
-                    await ctx.channel.send("Lawda he's not muted only means")
+                    await ctx.channel.send("Lawda he's not muted only means what you'll do")
                 else:
                     unmute_embed = discord.Embed(
                         title="Unmute", color=0x00ff00)
@@ -346,7 +350,7 @@ class misc(commands.Cog):
             lock_logs.add_field(name="Moderator", value=ctx.author.mention)
             await self.client.get_channel(MOD_LOGS).send(embed=lock_logs)
         else:
-            await ctx.channel.send("Lawda, I am not dyno to let you do this")
+            await ctx.channel.send("Lawda, I am not Dyno to let you do this")
 
     @ commands.command(aliases=['unlock'])
     async def _unlock_channel(self, ctx, channelObj:discord.TextChannel = None):
@@ -382,7 +386,7 @@ class misc(commands.Cog):
     async def _support(self, ctx, *params):
         Embeds = discord.Embed(title="Contributions", color=0x00ff00)
         Embeds.add_field(
-            name="Github repo", value="https://github.com/sach-12/pesu-bot", inline=False)
+            name="Github repo", value="https://github.com/AlphaDelta1803/pesu-bot-2025", inline=False)
         Embeds.add_field(
             name='\u200b', value="If you wish to contribute to the bot, run these steps:", inline=False)
         rules = {
@@ -403,8 +407,9 @@ class misc(commands.Cog):
         flabby = ctx.guild.get_member(467341580051939339).mention
         e11i0t = ctx.guild.get_member(621283810926919680).mention
         sach = ctx.guild.get_member(723377619420184668).mention
+        alpha = ctx.guild.get_member(523340943437594624).mention
         Embeds.add_field(name="Reviewers", value="`ArvindAROO` - {}\n `Flab-E` - {}\n `Mre11i0t` - {} and\n `sach-12` - {}".format(
-            stark, flabby, e11i0t, sach), inline=False)
+            stark, flabby, e11i0t, sach, alpha), inline=False)
         Embeds.add_field(
             name="Important", value="**Under no circumstances is anyone allowed to merge to the main branch.**", inline=False)
         await ctx.send(embed=Embeds)
@@ -491,7 +496,7 @@ class misc(commands.Cog):
         plt.close()
         os.remove('ps.jpg')
     
-
+'''
     @ commands.command(aliases=['kick'])
     async def _kick(self, ctx, memb, *, reason:str = ""):
         kick_help_embed = discord.Embed(
@@ -532,10 +537,10 @@ class misc(commands.Cog):
                 await ctx.guild.kick(member, reason=reason)
         else:
             await ctx.channel.send("Lawda, I am not dyno to let you do this")
-
+'''
     @commands.command(aliases=['pull'])
     async def git_pull(self, ctx):
-        if ctx.author.id == 723377619420184668 or ctx.author.id == 718845827413442692:
+        if ctx.author.id == 723377619420184668 or ctx.author.id == 718845827413442692 or ctx.author.id == 523340943437594624:
             sys.stdout.flush()
             p = subprocess.Popen(['git', 'pull'], stdout=subprocess.PIPE)
             for line in iter(p.stdout.readline, ''):
@@ -548,7 +553,7 @@ class misc(commands.Cog):
 
     @commands.command(aliases = ['bash'])
     async def _script(self, ctx):
-        if ctx.author.id == 723377619420184668 or ctx.author.id == 718845827413442692:
+        if ctx.author.id == 723377619420184668 or ctx.author.id == 718845827413442692 or ctx.author.id == 523340943437594624:
             await ctx.channel.send("Enter your command")
             message = await self.client.wait_for('message', check=lambda m: m.author.id == ctx.author.id)
             code = None
@@ -613,8 +618,8 @@ class misc(commands.Cog):
 
     @commands.command(aliases=['restart'])
     async def _restart(self, ctx):
-        BOT_TEST = 749473757843947671
-        if ctx.author.id == 723377619420184668 or ctx.author.id == 718845827413442692:
+        BOT_TEST = 931523862443724830
+        if ctx.author.id == 723377619420184668 or ctx.author.id == 718845827413442692 or ctx.author.id == 523340943437594624:
             await self.git_pull(ctx)
             with open('cogs/verified.csv', 'r') as fp:
                 await self.client.get_channel(BOT_TEST).send(file=discord.File(fp, 'verified.csv'))
@@ -624,19 +629,19 @@ class misc(commands.Cog):
         else:
             await ctx.channel.send("Cuteeeeeeeeeeeeeeeeeeeeeeeeeeeee")
             await asyncio.sleep(1)
-            await ctx.channel.send("NO")
+            await ctx.channel.send("**NO.**")
 
     @commands.command(aliases=['enableconfess'])
     async def flush_slash(self, ctx):
         if((self.admin in ctx.author.roles) or (self.mods in ctx.author.roles) or (self.bot_devs in ctx.author.roles)):
             await ctx.channel.trigger_typing()
-            await utils.manage_commands.add_slash_command(bot_id=749484661717204992, bot_token=TOKEN, guild_id=GUILD_ID, cmd_name='confess', description='Submits an anonymous confession', options=[create_option(name="confession", description="Opinion or confession you want to post anonymously", option_type=3, required=True), create_option(name="msg_id", description="Message you want this confession to reply to", option_type=3, required=False)])
+            await utils.manage_commands.add_slash_command(bot_id=botID, bot_token=TOKEN, guild_id=GUILD_ID, cmd_name='confess', description='Submits an anonymous confession', options=[create_option(name="confession", description="Opinion or confession you want to post anonymously", option_type=3, required=True), create_option(name="msg_id", description="Message you want this confession to reply to", option_type=3, required=False)])
             await ctx.channel.send("Done")
             enabled = discord.Embed(title="Announcement from the mods", color=discord.Color.green(
             ), description="The confessions features has been enabled")
-            await self.client.get_channel(860224115633160203).send(embed=enabled)
+            await self.client.get_channel(confessChannel).send(embed=enabled)
             overwrites = discord.PermissionOverwrite(view_channel=False)
-            await self.client.get_channel(860224115633160203).set_permissions(ctx.guild.default_role, overwrite=overwrites)
+            await self.client.get_channel(confessChannel).set_permissions(ctx.guild.default_role, overwrite=overwrites)
         else:
             await ctx.channel.send("You are not authorised for this")
 
@@ -644,23 +649,23 @@ class misc(commands.Cog):
     async def disable_confess(self, ctx):
         if((self.admin in ctx.author.roles) or (self.mods in ctx.author.roles)):
             await ctx.channel.trigger_typing()
-            resp = await utils.manage_commands.get_all_commands(749484661717204992, TOKEN, guild_id=GUILD_ID)
+            resp = await utils.manage_commands.get_all_commands(botID, TOKEN, guild_id=GUILD_ID)
             slash_id = 0
             for comms in resp:
                 if(comms['name'] == 'confess'):
                     slash_id = int(comms['id'])
-            await utils.manage_commands.remove_slash_command(bot_id=749484661717204992, bot_token=TOKEN, guild_id=GUILD_ID, cmd_id=slash_id)
+            await utils.manage_commands.remove_slash_command(bot_id=botID, bot_token=TOKEN, guild_id=GUILD_ID, cmd_id=slash_id)
             await ctx.channel.send("Done")
             disabled = discord.Embed(title="Announcement from the mods", color=discord.Color.red(
             ), description="The confessions features has been disabled")
-            await self.client.get_channel(860224115633160203).send(embed=disabled)
+            await self.client.get_channel(confessChannel).send(embed=disabled)
             overwrites = discord.PermissionOverwrite(
                 send_messages=False, view_channel=False)
-            await self.client.get_channel(860224115633160203).set_permissions(ctx.guild.default_role, overwrite=overwrites)
+            await self.client.get_channel(confessChannel).set_permissions(ctx.guild.default_role, overwrite=overwrites)
         else:
             await ctx.channel.send("You are not authorised for this")
 
-
+'''
     @cog_ext.cog_slash(name="elective",
         description="Choose your elective",
         options=[
@@ -694,7 +699,7 @@ class misc(commands.Cog):
         overwrite.view_channel = True
         await dest.set_permissions(ctx.author, overwrite=overwrite)
         await ctx.send(f"You now have access to {dest.mention}", hidden=True)
-
+'''
     @ cog_ext.cog_slash(name="nickchange", description="Change someone else's nickname", options=[create_option(name="member", description="The member whose nickname you desire to change", option_type=6, required=True), create_option(name="new_name", description="The new name you want to give this fellow", option_type=3, required=True)])
     async def nickchange(self, ctx, member: discord.Member, new_name: str):
         perms = ctx.channel.permissions_for(ctx.author)
@@ -729,15 +734,9 @@ class misc(commands.Cog):
         for line in banFile:
             banList.append(line.split('\n')[0].replace('\n', ''))
         if(memberId not in banList):
-            if(ctx.author_id == 718056684450480189):
-                deppList = ['depp', 'd3pp']
-                for word in deppList:
-                    if(word in confession.lower()):
-                        await ctx.send(":x: You think you are smart eh", hidden=True)
-                        return
             confessEmbed = discord.Embed(title="Anonymous confession", color=discord.Color.random(
             ), description=confession, timestamp=datetime.now(IST))
-            dest = self.client.get_channel(860224115633160203)
+            dest = self.client.get_channel(confessChannel)
             await ctx.send(f":white_check_mark: Your confession has been submitted to {dest.mention}", hidden=True)
             try:
                 msg_id = int(msg_id)
@@ -747,7 +746,7 @@ class misc(commands.Cog):
                 await dest.send(embed=confessEmbed)
             messages = await dest.history(limit=3).flatten()
             for message in messages:
-                if((message.author.id == 749484661717204992) and (len(message.embeds) > 0)):
+                if((message.author.id == botID) and (len(message.embeds) > 0)):
                     required_message = message
                     break
             await self.storeId(str(ctx.author_id), str(required_message.id))
