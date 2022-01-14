@@ -83,7 +83,7 @@ class misc(commands.Cog):
             self.guildObj = self.client.get_guild(GUILD_ID)
             self.admin = get(self.guildObj.roles, id=887323105905745980)
             self.mods = get(self.guildObj.roles, id=887368912860241950)
-            self.bot_devs = get(self.guildObj.roles, id=523340943437594624)
+            self.bot_devs = get(self.guildObj.roles, id=931588180174589983)
             self.bots = get(self.guildObj.roles, id=887365365213052991)
             self.pesu_bot = get(self.guildObj.roles, id=pesuID)
             self.muted = get(self.guildObj.roles, id=931576052092915772)
