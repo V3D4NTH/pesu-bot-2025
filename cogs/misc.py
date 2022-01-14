@@ -89,13 +89,13 @@ class misc(commands.Cog):
             self.muted = get(self.guildObj.roles, id=931576052092915772)
         except:
             pass
-    
+    '''
     def load_elective_choices(self):
         global electiveChoiceList
         electiveChoiceList = []
         for ec in self.electivelist:
             electiveChoiceList.append(create_choice(name=ec, value=self.electivelist[ec]))
-
+'''
     # @commands.Cog.listener()
     # async def on_message(self, message):
     #     if('chad' in message.content.lower().replace('‎', '').replace('chadwick', '')):
