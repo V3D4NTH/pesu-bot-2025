@@ -13,20 +13,20 @@
 
 **IMPORTANT**:
 
-Due to the discontinuance of the development of the discord.py library (Read [here](https://gist.github.com/Rapptz/4a2f62751b9600a31a0d3c78100287f1)), we will no longer be developing this bot. We will now work on migrating the entire bot to JS, i.e., using the discord.js library. There will be a new [repository](https://github.com/sach-12/pesu-bot-js) for it wherein you can help us contribute towards the migration.
+Due to the discontinuance of the development of the discord.py library (Read [here](https://gist.github.com/Rapptz/4a2f62751b9600a31a0d3c78100287f1)), we will no longer be developing this bot. Migration to JavaScript is finished. The JS rewritten bot repository can be found [here](https://github.com/sach-12/pesu-bot-js). 
 
 
-**UPDATE**:
+**HOWEVER,** since first year peeps do not know JS, alphadelta1803 took the archived repo and customised it for the PES '25 server
 
-The PESU Python Bot is now offline forever. Migration to JavaScript is finished and this repository will now be read-only. The JS rewritten bot repository can be found [here](https://github.com/sach-12/pesu-bot-js)
-
-
-
-The source code for authentication and moderation bot used in "PESU 2019 Batch" discord server
+The source code for authentication and moderation bot used in "PES'25" discord server
 
 Download the required modules by using the following command:
 
 `pip3 install -r requirements.txt`
+
+Then, run the bot by using the following command:
+
+`python3 bot.py`
 
 If you wish to contribute to the bot, run these steps:
 
