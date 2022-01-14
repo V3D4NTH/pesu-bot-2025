@@ -9,11 +9,11 @@ TOKEN = os.getenv('DISCORD_TOKEN')
 
 client = commands.Bot(command_prefix='!', help_command=None, intents=discord.Intents().all())
 slash = SlashCommand(client, sync_on_cog_reload = True)
-BOT_LOGS = 786084620944146504
+BOT_LOGS = 931523901731799080
 
 @client.command(aliases = ['loadit'])
 async def load(ctx, extension):
-    bot_devs = discord.utils.get(ctx.guild.roles, id=750556082371559485)
+    bot_devs = discord.utils.get(ctx.guild.roles, id=931588180174589983)
     if(bot_devs in ctx.author.roles):
         try:
             client.load_extension(f"cogs.{extension}")
@@ -28,7 +28,7 @@ async def load(ctx, extension):
 
 @client.command(aliases = ['unloadit'])
 async def unload(ctx, extension):
-    bot_devs = discord.utils.get(ctx.guild.roles, id=750556082371559485)
+    bot_devs = discord.utils.get(ctx.guild.roles, id=931588180174589983)
     if(bot_devs in ctx.author.roles):
         try:
             client.unload_extension(f"cogs.{extension}")
