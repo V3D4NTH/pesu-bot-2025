@@ -9,25 +9,10 @@ from selenium import webdriver
 from pathlib import Path
 from cogs.helpers import helpers
 
-GUILD_ID = 742797665301168220
-BOT_LOGS = 786084620944146504
-MOD_LOGS = 778678059879890944
-# ANNOUNCEMENTS = 749628212782563368
-
-# CHROMEDRIVER_PATH = "/usr/bin/chromedriver"
-# PESU_SRN=os.getenv('SRN')
-# PESU_PWD=os.getenv('PASSWD')
-# chrome_options = webdriver.ChromeOptions()
-# chrome_options.add_argument("--headless")
-# chrome_options.add_argument("--disable-dev-shm-usage")
-# chrome_options.add_argument("--no-sandbox")
-# chrome_options.add_argument('--ignore-ssl-errors=yes')
-# chrome_options.add_argument('--ignore-certificate-errors')
-# 
-# TODAY_ANNOUNCEMENTS_MADE = list()
-# ALL_ANNOUNCEMENTS_MADE = list() 
-
-
+BOT_TEST = 931523862443724830
+BOT_LOGS = 931523901731799080
+GUILD_ID = 887186488847138837
+botID = 
 
 class server(commands.Cog):
 
@@ -59,12 +44,12 @@ class server(commands.Cog):
     async def on_ready(self):
         await self.client.wait_until_ready()
         self.guildObj = self.client.get_guild(GUILD_ID)
-        self.admin = get(self.guildObj.roles, id=742800061280550923)
-        self.mods = get(self.guildObj.roles, id=742798158966292640)
-        self.bot_devs = get(self.guildObj.roles, id=750556082371559485)
-        self.budday = get(self.guildObj.roles, id=842294715415396383)
-        self.just_joined = get(self.guildObj.roles, id=798765678739062804)
-        self.verified = get(self.guildObj.roles, id=749683320941445250)
+        self.admin = get(self.guildObj.roles, id=887323105905745980)
+        self.mods = get(self.guildObj.roles, id=887368912860241950)
+        self.bot_devs = get(self.guildObj.roles, id=523340943437594624)
+        self.just_joined = get(self.guildObj.roles, id=931524531691069480)
+        self.verified = get(self.guildObj.roles, id=931525247079960606)
+        self.senior = get(self.guildObj.roles, id=887366779880501250)
 
         await self.client.get_channel(BOT_LOGS).send("Bot is online")
         await self.client.get_channel(BOT_LOGS).send(f"Logged in as {self.client.user}")
@@ -108,25 +93,19 @@ class server(commands.Cog):
             pass
         else:
             temp = message.content.replace("`", "|")
-            if ('<@&781150455576789032>' in str(temp)):
-                ping_log = f"{message.author.mention} pinged lawda geng in {message.channel.mention}"
-                ping_embed = discord.Embed(title="Ping", color=0x0000ff)
-                ping_embed.add_field(name="Ping report", value=ping_log, inline=False)
-                ping_embed.add_field(name="Message content", value=f"https://discord.com/channels/{GUILD_ID}/{message.channel.id}/{message.id}", inline=False)
-                await self.client.get_channel(MOD_LOGS).send(embed=ping_embed)
-            if ('<@&750556082371559485>' in str(temp)):
+            if ('<@!523340943437594624>' in str(temp)): # Bot devs
                 ping_log = f"{message.author.mention} pinged botdev in {message.channel.mention}"            
                 ping_embed = discord.Embed(title="Ping", color=0x0000ff)
                 ping_embed.add_field(name="Ping report", value=ping_log, inline=False)
                 ping_embed.add_field(name="Message content", value=f"https://discord.com/channels/{GUILD_ID}/{message.channel.id}/{message.id}", inline=False)
                 await self.client.get_channel(MOD_LOGS).send(embed=ping_embed)
-            if ('<@&742798158966292640>' in str(temp)) :
+            if ('<@&887368912860241950>' in str(temp)) : #Time keepers
                 ping_log = f"{message.author.mention} pinged mods in {message.channel.mention}"
                 ping_embed = discord.Embed(title="Ping", color=0x0000ff)
                 ping_embed.add_field(name="Ping report", value=ping_log, inline=False)
                 ping_embed.add_field(name="Message content", value=f"https://discord.com/channels/{GUILD_ID}/{message.channel.id}/{message.id}", inline=False)
                 await self.client.get_channel(MOD_LOGS).send(embed=ping_embed)
-            if ('<@&742800061280550923>' in str(temp)):
+            if ('<@&887323105905745980>' in str(temp)):
                 ping_log = f"{message.author.mention} pinged admin in {message.channel.mention}"
                 ping_embed = discord.Embed(title="Ping", color=0x0000ff)
                 ping_embed.add_field(name="Ping report", value=ping_log, inline=False)
@@ -136,7 +115,7 @@ class server(commands.Cog):
 
     @commands.Cog.listener()
     async def on_reaction_add(self, reaction, user):
-        if((reaction.message.author.id == 749484661717204992) and (not user.bot)):
+        if((reaction.message.author.id == botID) and (not user.bot)):
             try:
                 s = reaction.message.embeds[0].footer.text.lower()
                 if('poll by' in s):
