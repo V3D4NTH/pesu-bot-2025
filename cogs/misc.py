@@ -16,7 +16,7 @@ import pytz
 from clean import *
 IST = pytz.timezone('Asia/Kolkata')
 
-# pesuID = 
+pesuID = 931592628640813177
 botID = 931592628640813177
 confessChannel = 887187527256133652
 GUILD_ID = 887186488847138837
