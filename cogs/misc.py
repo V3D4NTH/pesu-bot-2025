@@ -115,8 +115,7 @@ class misc(commands.Cog):
     #             await after.channel.send("nin amn you think you are smart huh")
     #             await after.channel.send(f"no editing to chad either {after.author.mention} <:tengue_fold:762662965387460629>")
     #     pass
-    
-    @commands.command(aliases = ['uptime', 'ut'])
+    @ commands.command(aliases = ['uptime', 'ut'])
     async def _upTime(self, ctx):
         currTime = int(presentTime())
         seconds = (currTime - self.startTime)//1
@@ -168,7 +167,6 @@ class misc(commands.Cog):
                     if boolean:
                         count += 1
             await ctx.channel.send(f"{str(count)} people has role {str(thisRole)}")
-'''
     @commands.command(aliases=['p', 'purge'])
     async def _clear(self, ctx, amt=0):
         purge_embed = discord.Embed(
@@ -183,7 +181,6 @@ class misc(commands.Cog):
             await ctx.channel.purge(limit=amt+1)
         else:
             await ctx.channel.send(f"{ctx.author.mention} You are not authorised to do that")
-'''
     @commands.command(aliases=['e', 'echo'])
     async def _echo(self, ctx, dest: discord.TextChannel = None, *, message: str = ''):
         echo_embed = discord.Embed(
@@ -335,7 +332,6 @@ class misc(commands.Cog):
         if(channelObj not in ctx.guild.channels):
             reason = str(channelObj)
             channelObj = ctx.channel
-        
 
         if((self.admin in ctx.author.roles) or (self.mods in ctx.author.roles)):
             await channelObj.set_permissions(ctx.guild.default_role, overwrite=overwrites)
@@ -495,8 +491,7 @@ class misc(commands.Cog):
         await ctx.channel.send(embed=poll_results, file=file1)
         plt.close()
         os.remove('ps.jpg')
-    
-'''
+
     @ commands.command(aliases=['kick'])
     async def _kick(self, ctx, memb, *, reason:str = ""):
         kick_help_embed = discord.Embed(
@@ -537,7 +532,6 @@ class misc(commands.Cog):
                 await ctx.guild.kick(member, reason=reason)
         else:
             await ctx.channel.send("Lawda, I am not dyno to let you do this")
-'''
     @commands.command(aliases=['pull'])
     async def git_pull(self, ctx):
         if ctx.author.id == 723377619420184668 or ctx.author.id == 718845827413442692 or ctx.author.id == 523340943437594624:
@@ -665,42 +659,7 @@ class misc(commands.Cog):
         else:
             await ctx.channel.send("You are not authorised for this")
 
-'''
-    @cog_ext.cog_slash(name="elective",
-        description="Choose your elective",
-        options=[
-            create_option(
-                name="subject",
-                description="Choose from the options",
-                option_type=3,
-                required=True,
-                choices=electiveChoiceList
-            )
-        ]
-    )
-    async def elective(self, ctx, subject):
-        await ctx.defer(hidden=True)
-        dest = self.client.get_channel(int(subject))
-        perms = dest.permissions_for(ctx.author)
-        if(perms.view_channel):
-            await ctx.send(f"You already had access to this channel. I will revoke the access now", hidden=True)
-            await dest.set_permissions(ctx.author, overwrite=None)
-            return
-        # Junior or Non-verified check
-        role_list = ctx.author.roles
-        for role in role_list:
-            if("Junior" in role.name or "Kid" in role.name):
-                await ctx.send("This feature is only for the 2019 batch", hidden=True)
-                return
-            if("Just Joined" in role.name):
-                await ctx.send("You can choose your elective only after you verify yourself", hidden=True)
-                return
-        overwrite = discord.PermissionOverwrite()
-        overwrite.view_channel = True
-        await dest.set_permissions(ctx.author, overwrite=overwrite)
-        await ctx.send(f"You now have access to {dest.mention}", hidden=True)
-'''
-    @ cog_ext.cog_slash(name="nickchange", description="Change someone else's nickname", options=[create_option(name="member", description="The member whose nickname you desire to change", option_type=6, required=True), create_option(name="new_name", description="The new name you want to give this fellow", option_type=3, required=True)])
+    @cog_ext.cog_slash(name="nickchange", description="Change someone else's nickname", options=[create_option(name="member", description="The member whose nickname you desire to change", option_type=6, required=True), create_option(name="new_name", description="The new name you want to give this fellow", option_type=3, required=True)])
     async def nickchange(self, ctx, member: discord.Member, new_name: str):
         perms = ctx.channel.permissions_for(ctx.author)
         if((perms.manage_nicknames) and (ctx.author.top_role.position > member.top_role.position)):

@@ -35,7 +35,6 @@ class helpers(commands.Cog):
             if(RegNo in lin):
                 f.close()
                 return lin.split(',')
-        
         file.close()
         return ['error']
 
@@ -52,7 +51,6 @@ class helpers(commands.Cog):
                 ret = True
 
         file1.close()
-        
         file1 = open('cogs/verified.csv', 'w')
         file1.write(dat)
         file1.close()

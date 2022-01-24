@@ -7,6 +7,7 @@ from discord_slash import SlashCommand
 load_dotenv('.env')
 TOKEN = os.getenv('DISCORD_TOKEN')
 
+TOKEN = 931592628640813177
 client = commands.Bot(command_prefix='p!', help_command=None, intents=discord.Intents().all())
 slash = SlashCommand(client, sync_on_cog_reload = True)
 BOT_LOGS = 931523901731799080

@@ -13,6 +13,7 @@ BOT_TEST = 931523862443724830
 BOT_LOGS = 931523901731799080
 GUILD_ID = 887186488847138837
 botID = 931592628640813177
+MOD_LOGS = 931523901731799080
 
 class server(commands.Cog):
 
@@ -50,7 +51,7 @@ class server(commands.Cog):
         self.just_joined = get(self.guildObj.roles, id=931524531691069480)
         self.verified = get(self.guildObj.roles, id=931525247079960606)
         self.senior = get(self.guildObj.roles, id=887366779880501250)
-
+        #self.budday = get(self,guildObj.roles, id=935170714066108517)
         await self.client.get_channel(BOT_LOGS).send("Bot is online")
         await self.client.get_channel(BOT_LOGS).send(f"Logged in as {self.client.user}")
         await self.client.change_presence(
@@ -81,10 +82,10 @@ class server(commands.Cog):
             await self.client.get_channel(BOT_LOGS).send("Deverified the user")
 
 
-    @commands.Cog.listener()
-    async def on_member_update(self, before, after):
-        if((self.budday not in before.roles) and (self.budday in after.roles)):
-            await self.client.get_channel(798472825589334036).send(f"Yo, it's {before.mention}'s birthday!")
+    #@commands.Cog.listener()
+    #async def on_member_update(self, before, after):
+    #    if((self.budday not in before.roles) and (self.budday in after.roles)):
+    #        await self.client.get_channel(798472825589334036).send(f"Yo, it's {before.mention}'s birthday!")
 
 
     @commands.Cog.listener()
@@ -94,7 +95,7 @@ class server(commands.Cog):
         else:
             temp = message.content.replace("`", "|")
             if ('<@!523340943437594624>' in str(temp)): # Bot devs
-                ping_log = f"{message.author.mention} pinged botdev in {message.channel.mention}"            
+                ping_log = f"{message.author.mention} pinged botdev in {message.channel.mention}"
                 ping_embed = discord.Embed(title="Ping", color=0x0000ff)
                 ping_embed.add_field(name="Ping report", value=ping_log, inline=False)
                 ping_embed.add_field(name="Message content", value=f"https://discord.com/channels/{GUILD_ID}/{message.channel.id}/{message.id}", inline=False)
@@ -129,7 +130,7 @@ class server(commands.Cog):
             except:
                 pass
 
-                    
+
     @commands.Cog.listener()
     async def on_message_delete(self, message):
         if(message.author.bot):
@@ -154,7 +155,7 @@ class server(commands.Cog):
                 pass
             self.snipe = None
 
-    
+
     @commands.command(aliases=['h', 'help'])
     async def _help(self, ctx):
         help_embed = discord.Embed(title="PESU BOT", color=0x48BF91)
@@ -200,7 +201,6 @@ class server(commands.Cog):
                 ret = True
 
         file1.close()
-        
         file1 = open('cogs/verified.csv', 'w')
         file1.write(dat)
         file1.close()
@@ -210,4 +210,3 @@ class server(commands.Cog):
 
 def setup(client):
     client.add_cog(server(client))
-    

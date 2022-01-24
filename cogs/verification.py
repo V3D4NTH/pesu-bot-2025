@@ -23,9 +23,11 @@ def stream(inp):
 def campus(inp):
     if inp == "PES University (Ring Road)":
         return "RR Campus"
-    else:
+    elif inp == "PES University (Electronics City)":
         return "EC Campus"
-    
+    else:
+        return "HN Campus"
+
 class verification(commands.Cog):
 
     def __init__(self, client):
@@ -55,7 +57,7 @@ class verification(commands.Cog):
         ]
         self.info = '`!i` or `!info`\n!i {Member mention}\n!i {Member ID}\n\nReturns the information about a verified user on this server'
         self.deverify = '`!d` or `!deverify`\n!d {Member mention}\n\nDeverifies and removes the data of the user from the verified list'
-        self.load_roles()        
+        self.load_roles()
 
 
     @commands.Cog.listener()

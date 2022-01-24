@@ -1,0 +1,2 @@
+PRN	      SRN           Semester Section    Cycle Stream/Campus     Stream Campus
+PES12019***** PES1UG19***** Sem-5    Section A  NA    BArch (RR Campus) B ARCH PES University (Ring Road)
