@@ -25,8 +25,7 @@ class helpers(commands.Cog):
             file = open('cogs/batch_list_2019.csv', 'r')
         elif ('PES1UG20' in RegNo or 'PES2UG20' in RegNo):
             file = open('cogs/batch_list_2020.csv', 'r')
-        # elif ('PES1UG21' in a):
-        elif ('PES12021' in RegNo or 'PES22021' in RegNo):
+        elif ('PES1UG21' in RegNo or 'PES2UG21' in RegNo):
             file = open('cogs/batch_list_2021.csv', 'r')
 
         if file == None:
