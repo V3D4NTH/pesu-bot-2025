@@ -36,8 +36,8 @@ If you wish to contribute to the bot, run these steps:
 
 3. Do whatever changes you wish to do and create a pull request with the following information furnished in the request message: `The cog you wish to change | What did you change`
 
-4. Send a review request to any of the following members: `Flab-E`, `sach-12`, `Mre11i0t` and/or `ArvindAROO`.
+4. Send a review request to `alfadelta10010`.
 
-5. Wait for approval for reviewers. Your PR may be directly accepted or requested for further changes.
+5. Wait for approval from the reviewer. Your PR may be directly accepted or requested for further changes.
 
 **Under no circumstances is anyone allowed to merge to the main branch.**
