@@ -193,7 +193,7 @@ class verification(commands.Cog):
                         await ctx.channel.send(f"{user.mention} Looks like your role isn't on the server yet. DM <@!523340943437594624>")
                         return
                 elif(dat[2] == 'Sem-2'):
-                    role_str = "Freshers"
+                    role_str = "Second Years"
                     str_rl = stream(dat[-2])
                     camp_rl = campus(dat[-1])
                     try:
