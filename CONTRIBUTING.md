@@ -18,5 +18,5 @@ If you wish to contribute to the bot, follow these steps:
 `cogs/misc.py` - Contains functions pertaining to confess, count members, mute, and various others. 90% of issues exist here.<br>
 `cogs/server.py` - Contains functions pertaining to server-based activities, like ping report, etc.<br>
 `cogs/verification.py` - The most critical cog. Contains all commands pertaining to parsing the information of SRNs and PRNs, and the verified users file.<br>
-`notes.txt` - Contains samples of the batch_list_20XX.csv file<br>
-`verified_example.csv` - Contains sample of the verified.csv file<br>
+`docs/sample_batch_list.txt` - Contains samples of the batch_list_20XX.csv file<br>
+`docs/verified_example.csv` - Contains sample of the verified.csv file<br>
