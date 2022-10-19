@@ -1,4 +1,4 @@
-##Contribution guidelines
+## Contribution guidelines
 
 If you wish to contribute to the bot, follow these steps:
 
@@ -12,11 +12,11 @@ If you wish to contribute to the bot, follow these steps:
 
 ## File Structure
 
-`bot.py` - The main bot file. Has commands to load and unload other cogs
-`start.py` - A file to ensure bot restart. Do not touch.
-`cogs/helpers.py` -  Contains functions for admins, to look up users, and to verify and devarify users.
-`cogs/misc.py` - Contains functions pertaining to confess, count members, mute, and various others. 90% of issues exist here.
-`cogs/server.py` - Contains functions pertaining to server-based activities, like ping report, etc.
-`cogs/verification.py` - The most critical cog. Contains all commands pertaining to parsing the information of SRNs and PRNs, and the verified users file.
-`notes.txt` - Contains samples of the batch_list_20XX.csv file
-`verified_example.csv` - Contains sample of the verified.csv file
+`bot.py` - The main bot file. Has commands to load and unload other cogs<br>
+`start.py` - A file to ensure bot restart. Do not touch.<br>
+`cogs/helpers.py` -  Contains functions for admins, to look up users, and to verify and devarify users.<br>
+`cogs/misc.py` - Contains functions pertaining to confess, count members, mute, and various others. 90% of issues exist here.<br>
+`cogs/server.py` - Contains functions pertaining to server-based activities, like ping report, etc.<br>
+`cogs/verification.py` - The most critical cog. Contains all commands pertaining to parsing the information of SRNs and PRNs, and the verified users file.<br>
+`notes.txt` - Contains samples of the batch_list_20XX.csv file<br>
+`verified_example.csv` - Contains sample of the verified.csv file<br>
