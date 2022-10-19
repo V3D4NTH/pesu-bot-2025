@@ -18,9 +18,9 @@ Uses [discord.py](https://github.com/Rapptz/discord.py), [discord-py-slash-comma
 
 ## Testing
 
-Download the required modules by using the following command:
+Enable the Virtual Environment with the following command:
 
-`pip3 install -r requirements.txt`
+`source botEnv/bin/activate`
 
 Create a `.env` file with the following contents:
 
