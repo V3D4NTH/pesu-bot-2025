@@ -18,9 +18,9 @@ IST = pytz.timezone('Asia/Kolkata')
 
 pesuID = 931592628640813177
 botID = 931592628640813177
-confessChannel = 887187527256133652
-GUILD_ID = 887186488847138837
-MOD_LOGS = 929675062242578432
+confessChannel = 1032709445534359627
+GUILD_ID = 1032709443860832426
+MOD_LOGS = 1032709445324652604
 TOKEN = os.getenv('DISCORD_TOKEN')
 electiveChoiceList = []
 
@@ -51,12 +51,12 @@ class misc(commands.Cog):
     def load_roles(self):
         try:
             self.guildObj = self.client.get_guild(GUILD_ID)
-            self.admin = get(self.guildObj.roles, id=887323105905745980)
-            self.mods = get(self.guildObj.roles, id=887368912860241950)
-            self.bot_devs = get(self.guildObj.roles, id=931588180174589983)
-            self.bots = get(self.guildObj.roles, id=887365365213052991)
+            self.admin = get(self.guildObj.roles, id=1032709443940524228)
+            self.mods = get(self.guildObj.roles, id=1032709443940524227)
+            self.bot_devs = get(self.guildObj.roles, id=1032709443940524226)
+            self.bots = get(self.guildObj.roles, id=1032709443940524223)
             self.pesu_bot = get(self.guildObj.roles, id=pesuID)
-            self.muted = get(self.guildObj.roles, id=931576052092915772)
+            self.muted = get(self.guildObj.roles, id=1032709443919560834)
         except:
             pass
     @ commands.command(aliases = ['uptime', 'ut'])
@@ -77,9 +77,9 @@ class misc(commands.Cog):
             await ctx.channel.trigger_typing()
             for guild in self.client.guilds:
                 total = len(guild.members)
-                verified_role = get(ctx.guild.roles, id = 749683320941445250)
-                rrRole = get(self.guildObj.roles, id=887368132140888106)
-                ecRole = get(self.guildObj.roles, id=887368427793178684)
+                verified_role = get(ctx.guild.roles, id = 1032709443890188299)
+                rrRole = get(self.guildObj.roles, id=1032716822799200298)
+                ecRole = get(self.guildObj.roles, id=1032716874917630012)
                 seniorRole = get(self.guildObj.roles, id=887366779880501250)
                 verified = 0
                 hooman = 0
@@ -495,7 +495,7 @@ class misc(commands.Cog):
 
     @commands.command(aliases=['pull'])
     async def git_pull(self, ctx):
-        if ctx.author.id == 723377619420184668 or ctx.author.id == 718845827413442692 or ctx.author.id == 523340943437594624:
+        if ctx.author.id == 523340943437594624:
             sys.stdout.flush()
             p = subprocess.Popen(['git', 'pull'], stdout=subprocess.PIPE)
             for line in iter(p.stdout.readline, ''):
@@ -573,8 +573,8 @@ class misc(commands.Cog):
 
     @commands.command(aliases=['restart'])
     async def _restart(self, ctx):
-        BOT_TEST = 931523862443724830
-        if ctx.author.id == 723377619420184668 or ctx.author.id == 718845827413442692 or ctx.author.id == 523340943437594624:
+        BOT_TEST = 1032709445324652605
+        if ctx.author.id == 523340943437594624:
             await self.git_pull(ctx)
             with open('cogs/verified.csv', 'r') as fp:
                 await self.client.get_channel(BOT_TEST).send(file=discord.File(fp, 'verified.csv'))

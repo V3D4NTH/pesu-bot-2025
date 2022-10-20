@@ -4,9 +4,9 @@ from asyncio import sleep
 from discord.utils import get
 from cogs.helpers import helpers
 
-BOT_TEST = 931523862443724830
-BOT_LOGS = 931523901731799080
-GUILD_ID = 887186488847138837
+BOT_TEST = 1032709445324652605
+BOT_LOGS = 1032709445324652606
+GUILD_ID = 1032709443860832426
 
 def stream(inp):
     if inp == "ECE":
@@ -69,12 +69,12 @@ class verification(commands.Cog):
     def load_roles(self):
         try:
             self.guildObj = self.client.get_guild(GUILD_ID)
-            self.admin = get(self.guildObj.roles, id=887323105905745980)
-            self.mods = get(self.guildObj.roles, id=887368912860241950)
-            self.bot_devs = get(self.guildObj.roles, id=931588180174589983)
-            self.just_joined = get(self.guildObj.roles, id=931524531691069480)
-            self.verified = get(self.guildObj.roles, id=931525247079960606)
-            self.senior = get(self.guildObj.roles, id=887366779880501250)
+            self.admin = get(self.guildObj.roles, id=1032709443940524228)
+            self.mods = get(self.guildObj.roles, id=1032709443940524227)
+            self.bot_devs = get(self.guildObj.roles, id=1032709443940524226)
+            self.just_joined = get(self.guildObj.roles, id=1032714828197937152)
+            self.verified = get(self.guildObj.roles, id=1032714872695304203)
+            self.senior = get(self.guildObj.roles, id=1032714925832949820)
         except:
             pass
 
