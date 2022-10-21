@@ -178,8 +178,8 @@ class verification(commands.Cog):
                     return
                 if(dat[2] == 'Sem-1'):
                     role_str = "First Year Keeds"
-                    str_rl = stream(dat[-2])
-                    camp_rl = campus(dat[-1])
+                    str_rl = stream(dat[6])
+                    camp_rl = campus(dat[7])
                     try:
                         role = get(user.guild.roles, name=role_str)
                         st_role = get(user.guild.roles, name=str_rl)
@@ -193,8 +193,8 @@ class verification(commands.Cog):
                         return
                 elif(dat[2] == 'Sem-2'):
                     role_str = "First Year Keeds"
-                    str_rl = stream(dat[-2])
-                    camp_rl = campus(dat[-1])
+                    str_rl = stream(dat[6])
+                    camp_rl = campus(dat[7])
                     try:
                         role = get(user.guild.roles, name=role_str)
                         st_role = get(user.guild.roles, name=str_rl)
@@ -208,8 +208,8 @@ class verification(commands.Cog):
                         return
                 elif(dat[2] == 'Sem-3'):
                     role_str = "Second Year"
-                    str_rl = stream(dat[-2])
-                    camp_rl = campus(dat[-1])
+                    str_rl = stream(dat[6])
+                    camp_rl = campus(dat[7])
                     try:
                         role = get(user.guild.roles, name=role_str)
                         st_role = get(user.guild.roles, name=str_rl)
@@ -223,8 +223,8 @@ class verification(commands.Cog):
                         return
                 elif(dat[2] == 'Sem-4'):
                     role_str = "Second Year"
-                    str_rl = stream(dat[-2])
-                    camp_rl = campus(dat[-1])
+                    str_rl = stream(dat[6])
+                    camp_rl = campus(dat[7])
                     try:
                         role = get(user.guild.roles, name=role_str)
                         st_role = get(user.guild.roles, name=str_rl)
@@ -238,8 +238,8 @@ class verification(commands.Cog):
                         return
                 if(dat[2] == 'Sem-5'):
                     role_str = "Seniors"
-                    str_rl = stream(dat[-2])
-                    camp_rl = campus(dat[-1])
+                    str_rl = stream(dat[6])
+                    camp_rl = campus(dat[7])
                     try:
                         role = get(user.guild.roles, name=role_str)
                         st_role = get(user.guild.roles, name=str_rl)
@@ -253,8 +253,8 @@ class verification(commands.Cog):
                         return
                 elif(dat[2] == 'Sem-6'):
                     role_str = "Seniors"
-                    str_rl = stream(dat[-2])
-                    camp_rl = campus(dat[-1])
+                    str_rl = stream(dat[6])
+                    camp_rl = campus(dat[7])
                     try:
                         role = get(user.guild.roles, name=role_str)
                         st_role = get(user.guild.roles, name=str_rl)
