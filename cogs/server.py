@@ -22,9 +22,9 @@ JUST_JOINED = 1032714828197937152
 VERIFIED = 1032714872695304203
 SENIOR = 1032714925832949820
 
-BOT_DEV_PING = 931588180174589983
-MOD_PING = 887368912860241950
-ADMIN_PING = 887323105905745980
+
+
+
 
 
 class server(commands.Cog):
@@ -113,19 +113,19 @@ class server(commands.Cog):
             pass
         else:
             temp = message.content.replace("`", "|")
-            if (f'<@!{BOT_DEV_PING}>' in str(temp)): # Bot devs
+            if (f'<@!{BOT_DEVS}>' in str(temp)): # Bot devs
                 ping_log = f"{message.author.mention} pinged botdev in {message.channel.mention}"
                 ping_embed = discord.Embed(title="Ping", color=0x0000ff)
                 ping_embed.add_field(name="Ping report", value=ping_log, inline=False)
                 ping_embed.add_field(name="Message content", value=f"https://discord.com/channels/{GUILD_ID}/{message.channel.id}/{message.id}", inline=False)
                 await self.client.get_channel(MOD_LOGS).send(embed=ping_embed)
-            if (f'<@&{MOD_PING}>' in str(temp)) : #Time keepers
+            if (f'<@&{MODS}>' in str(temp)) : #Time keepers
                 ping_log = f"{message.author.mention} pinged mods in {message.channel.mention}"
                 ping_embed = discord.Embed(title="Ping", color=0x0000ff)
                 ping_embed.add_field(name="Ping report", value=ping_log, inline=False)
                 ping_embed.add_field(name="Message content", value=f"https://discord.com/channels/{GUILD_ID}/{message.channel.id}/{message.id}", inline=False)
                 await self.client.get_channel(MOD_LOGS).send(embed=ping_embed)
-            if (f'<@&{ADMIN_PING}>' in str(temp)):
+            if (f'<@&{ADMIN}>' in str(temp)):
                 ping_log = f"{message.author.mention} pinged admin in {message.channel.mention}"
                 ping_embed = discord.Embed(title="Ping", color=0x0000ff)
                 ping_embed.add_field(name="Ping report", value=ping_log, inline=False)
