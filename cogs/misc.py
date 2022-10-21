@@ -308,28 +308,40 @@ class misc(commands.Cog):
         else:
             await ctx.channel.send("Lawda, I am not Dyno to let you do this")
 
-    @ commands.command(aliases=['unlock'])
-    async def _unlock_channel(self, ctx, channelObj:discord.TextChannel = None):
+    # @ commands.command(aliases=['unlock'])
+    @cog_ext.cog_slash( name="unlock",
+                        description="Unlocks the specified channel",
+                        guild_ids=[GUILD_ID],
+                        options=[
+                            create_option(
+                                name="channel",
+                                description="The channel to be unlocked",
+                                option_type=7,
+                                required=False
+                            )
+                        ]
+                      )
+    async def _unlock_channel(self, ctx, channel:discord.TextChannel = None):
         unlock_help_embed = discord.Embed(
             title="Unlock", color=0x48BF91, description=self.unlock)
         overwrites = discord.PermissionOverwrite(view_channel=False)
 
-        if(channelObj == None):
-            channelObj = ctx.channel
+        if(channel == None):
+            channel = ctx.channel
 
-        perms = channelObj.overwrites_for(ctx.guild.default_role)
+        perms = channel.overwrites_for(ctx.guild.default_role)
 
         if((self.admin in ctx.author.roles) or (self.mods in ctx.author.roles)):
             if ((perms.view_channel == False) and (perms.send_messages == False)):
-                await channelObj.set_permissions(ctx.guild.default_role, overwrite=overwrites)
+                await channel.set_permissions(ctx.guild.default_role, overwrite=overwrites)
                 unlock_embed = discord.Embed(
                     title="Channel Unlocked :unlock:", color=0x00ff00)
-                await channelObj.send(embed=unlock_embed)
+                await channel.send(embed=unlock_embed)
                 unlock_message = discord.Embed(
-                    title="", color=0x00ff00, description=f"Unlocked {channelObj.mention}")
+                    title="", color=0x00ff00, description=f"Unlocked {channel.mention}")
                 await ctx.channel.send(embed=unlock_message)
                 unlock_logs = discord.Embed(title="Unlock", color=0x00ff00)
-                unlock_logs.add_field(name="Channel", value=channelObj.mention)
+                unlock_logs.add_field(name="Channel", value=channel.mention)
                 unlock_logs.add_field(
                     name="Moderator", value=ctx.author.mention)
                 await self.client.get_channel(MOD_LOGS).reply(embed=unlock_logs)
@@ -455,7 +467,6 @@ class misc(commands.Cog):
     # @ commands.command(aliases=['kick'])
     @cog_ext.cog_slash( name="kick",
                         description="Kicks the member from the server",
-                        guild_ids=[GUILD_ID],
                         options=[
                             create_option(
                                 name="memb",
