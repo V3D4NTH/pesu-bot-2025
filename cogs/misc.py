@@ -605,11 +605,7 @@ class misc(commands.Cog):
         else:
             await ctx.send("You are not authorised for this command")
 
-    # @commands.command(aliases=['restart'])
-    @cog_ext.cog_slash( name="restart",
-                        guild_ids=[GUILD_ID],
-                        description="Restarts the bot"
-                      )
+    @commands.command(aliases=['restart'])
     async def _restart(self, ctx):
         BOT_TEST = 1032709445324652605
         if ctx.author.id == 523340943437594624:
@@ -620,9 +616,9 @@ class misc(commands.Cog):
             p = subprocess.Popen(['python3', 'start.py'])
             sys.exit(0)
         else:
-            await ctx.reply("Cuteeeeeeeeeeeeeeeeeeeeeeeeeeeee")
+            await ctx.channel.send("Cuteeeeeeeeeeeeeeeeeeeeeeeeeeeee")
             await asyncio.sleep(1)
-            await ctx.reply("**NO.**")
+            await ctx.channel.send("**NO.**")
 
     @commands.command(aliases=['enableconfess'])
     async def flush_slash(self, ctx):
