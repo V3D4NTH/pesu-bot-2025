@@ -19,32 +19,32 @@ class server(commands.Cog):
 
     def __init__(self, client):
         self.client = client
-        self.uptimeinfo ="`p!uptime` or `p!ut`\n\n\nShows how long the bot has been online for"
-        self.loadit = "`p!loadit`\n`p!loadit <extention>`\n\nLoads the extention"
-        self.unloadit = "`p!unloadit`\n`p!unloadit <extention>`\n\nUnloads the extention"
-        self.polsho = "`p!pollshow` or `p!ps`\n`p!ps <pollMessageLink>`\n\nShows the results of the poll"
-        self.pull = "`p!pull`\n\n\nPull the latest code of the bot. Maybe."
-        self.scrape = "`p!scrape`\nIdk how this works tbh"
-        self.rest = "`p!restart`\n\n\nRestarts the bot :flushed:"
-        self.confessen = "`p!enableconfess`\n\n\nEnables the confess feature"
-        self.confessdis = "`p!disableconfess`\n\n\nDisables the confess feature"
+        self.uptimeinfo ="`p!uptime` or `p!ut`\n\n\nShows how long the bot has been online for\n\n"
+        self.loadit = "`p!loadit <extention>`\n\n\nLoads the extention\n\n"
+        self.unloadit = "`p!unloadit <extention>`\n\nUnloads the extention\n\n"
+        self.polsho = "`p!pollshow` or `p!ps <pollMsgLink>`\n\nShows the results of the poll\n\n"
+        self.pull = "`p!pull`\n\nPull the latest code of the bot. Maybe.\n\n"
+        self.scrape = "`p!scrape`\n\nIdk how this works tbh :upside_down:\n\n"
+        self.rest = "`p!restart`\n\nRestarts the bot :flushed:\n\n"
+        self.confessen = "`p!enableconfess`\n\n\nEnables the confess feature\n\n"
+        self.confessdis = "`p!disableconfess`\n\n\nDisables the confess feature\n\n"
 	#self.confbanusr =
-        self.veri = '`p!v` or `p!verify`\np!v help\np!v {SRN}'
-        self.count = '`p!c` or `p!count`\np!c {Role name(don\'t mention it, type it out)}\n\nReturns the number of people with the speified role'
-        self.ping = '`p!ping` or `p!Ping`\n\nReturns the bot\'s latency'
+        self.veri = '`p!v` or `p!verify`\np!v help\np!v {SRN}\n\n'
+        self.count = '`p!c` or `p!count <role [Not mention]>`\n\nReturns the number of people with the specified role\n\n'
+        self.ping = '`p!ping` or `p!Ping`\n\n\nReturns the bot\'s latency\n\n'
         # self.news = '`!news [optional]`\n\nPESU Academy Notifications\nUsage:\n`!news`: Gets the latest announcement\n`!news today`: Gets today\'s announcements\n`!news {N}`: Gets the last "N" announcements(where N is a number)\n`!news today {N}`: Gets last "N" announcements made today\n`!news all`: Gets all announcements(max: 10)'
-        self.poll = '`p!poll`\nType `p!poll` to know more\nStarts a poll'
-        self.info = '`p!i` or `p!info`\np!i <Mention>\np!i <UserID>\n\nReturns the information about a verified user on this server'
-        self.deverify = '`p!d` or `p!deverify`\np!d <Mention>\n\nDeverifies and removes the data of the user from the verified list'
-        self.fil = '''`p!f` or `p!file`\n\nSends the verified.csv file to <#931523862443724830>'''
+        self.poll = '`p!poll`\n\n\nStarts a poll\n\n'
+        self.info = '`p!i` or `p!info <Mention>|<UserID>`\n\nReturns the information about a verified user on this server\n\n'
+        self.deverify = '`p!d` or `p!deverify`\n\n\nDeverifies and removes the data of the user from the verified list\n\n'
+        self.fil = f'`p!f` or `p!file`\n\nSends the verified.csv file to <#{931523862443724830}>\n\n'
         #self.purge = '`p!p` or `p!purge`\n!p <amount>\n\nPurges the specified number of messages(limit=1000)'
-        self.echo = '`p!e` or `p!echo`\n!e <channel> {Text}\n\nEchoes a message through the bot to the specified channel'
-        self.mute = '`p!mute`\np!mute <Mention> <Time> {Reason}\n\nMutes the user for the specified time'
-        self.unmute = '`p!unmute`\np!unmute <Mention>\n\nUnmutes the user'
-        self.lock = '`p!lock`\np!lock <channel> {Reason}\n\nLocks the specified channel'
-        self.unlock = '`p!unlock`\np!unlock <channel>\n\nUnlocks the specified channel'
-        self.kick = '`p!kick`\np!kick <Mention> {Reason}\n\nKicks the member from the server'
-        self.snipeinfo = "`p!snipe`\np!snipe\n\nResends the last deleted message on the server"
+        self.echo = '`p!e` or `p!echo <channel> <Text>`\n\nEchoes a message through the bot to the specified channel\n\n'
+        self.mute = '`p!mute <Mention> <Time> <Reason>`\n\nMutes the user for the specified time\n\n'
+        self.unmute = '`p!unmute <Mention>`\n\n\nUnmutes the user\n\n'
+        self.lock = '`p!lock <channel> <Reason>`\n\nLocks the specified channel\n\n'
+        self.unlock = '`p!unlock <channel>`\n\n\nUnlocks the specified channel\n\n'
+        self.kick = '`p!kick <Mention> <Reason>`\n\nKicks the member from the server\n\n'
+        self.snipeinfo = "`p!snipe`\n\n\nResends the last deleted message on the server\n\n"
 	# self.checkPESUAnnouncement.start()
         # self.checkNewDay.start()
         self.snipe = None
