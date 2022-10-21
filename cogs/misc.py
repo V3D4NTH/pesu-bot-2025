@@ -35,7 +35,7 @@ class misc(commands.Cog):
         self.unmute = '`!unmute`\n!unmute {Member mention}\n\nUnmutes the user'
         self.lock = '`!lock`\n!lock {Channel mention} {Reason: optional}\n\nLocks the specified channel'
         self.unlock = '`!unlock`\n!unlock {Channel mention}\n\nUnlocks the specified channel'
-        # self.kick = '`!kick`\n!kick {Member mention} {Reason: optional}\n\nKicks the member from the server'
+        self.kick = '`!kick`\n!kick {Member mention} {Reason: optional}\n\nKicks the member from the server'
         self.confessions = {}
         self.mutedict = {}
         self.startTime = int(presentTime())
@@ -452,14 +452,33 @@ class misc(commands.Cog):
         plt.close()
         os.remove('ps.jpg')
 
-    @ commands.command(aliases=['kick'])
+    # @ commands.command(aliases=['kick'])
+    @cog_ext.cog_slash( name="kick",
+                        description="Kicks the member from the server",
+                        guild_ids=[GUILD_ID],
+                        options=[
+                            create_option(
+                                name="memb",
+                                description="Member to be kicked or members seperated by \" \"",
+                                option_type=3,
+                                required=True
+                            ),
+                            create_option(
+                                name="reason",
+                                description="The reason for kick",
+                                option_type=3,
+                                required=True
+                            )
+                        ]
+                      )
     async def _kick(self, ctx, memb, *, reason:str = ""):
         kick_help_embed = discord.Embed(
             title="Kick", color=0x48BF91, description=self.kick)
 
         if(reason == ""):
             reason = "no reason given"
-        mens = ctx.message.raw_mentions
+        mens = [int(i.replace('<', "").replace(">", "").replace("@", "")) for i in memb.split(" ")]
+        print(mens)
         if(len(mens) == 0):
             await ctx.send("Mention the user and not just the name", embed=kick_help_embed)
             return
