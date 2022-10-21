@@ -344,9 +344,9 @@ class misc(commands.Cog):
                 unlock_logs.add_field(name="Channel", value=channel.mention)
                 unlock_logs.add_field(
                     name="Moderator", value=ctx.author.mention)
-                await self.client.get_channel(MOD_LOGS).send(embed=unlock_logs)
+                await self.client.get_channel(MOD_LOGS).reply(embed=unlock_logs)
             else:
-                await ctx.send("Lawda that channel is already unlocked")
+                await ctx.reply("Lawda that channel is already unlocked")
         else:
             await ctx.channel.send("Lawda, I am not dyno to let you do this")
 
@@ -489,9 +489,9 @@ class misc(commands.Cog):
         if(reason == ""):
             reason = "no reason given"
         mens = [int(i.replace('<', "").replace(">", "").replace("@", "")) for i in memb.split(" ")]
-        print(mens)
+
         if(len(mens) == 0):
-            await ctx.send("Mention the user and not just the name", embed=kick_help_embed)
+            await ctx.reply("Mention the user and not just the name", embed=kick_help_embed)
             return
         else:
             member = mens[0]
@@ -499,7 +499,7 @@ class misc(commands.Cog):
 
         # a small little spartan easter egg
         if ((self.bots in member.roles) and (ctx.author.id == 621677829100404746)):
-            await ctx.send("AAAAAAAAAAAAAHHHHHHHHHHHH no no no not again spartan!!! NOOOO")
+            await ctx.reply("AAAAAAAAAAAAAHHHHHHHHHHHH no no no not again spartan!!! NOOOO")
             return
 
         if((self.admin in ctx.author.roles) or (self.mods in ctx.author.roles)):
@@ -518,7 +518,7 @@ class misc(commands.Cog):
                 try:
                     await member.send(f"You were kicked from the PES'25 Batch Discord Server\n Reason: {reason}")
                 except:
-                    await ctx.send("that nonsense fellow hasn't opened his DMs only")
+                    await ctx.reply("that nonsense fellow hasn't opened his DMs only")
                 await ctx.guild.kick(member, reason=reason)
         else:
             await ctx.channel.send("Lawda, I am not dyno to let you do this")
