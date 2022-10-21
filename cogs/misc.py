@@ -35,7 +35,7 @@ class misc(commands.Cog):
         self.unmute = '`!unmute`\n!unmute {Member mention}\n\nUnmutes the user'
         self.lock = '`!lock`\n!lock {Channel mention} {Reason: optional}\n\nLocks the specified channel'
         self.unlock = '`!unlock`\n!unlock {Channel mention}\n\nUnlocks the specified channel'
-        # self.kick = '`!kick`\n!kick {Member mention} {Reason: optional}\n\nKicks the member from the server'
+        self.kick = '`!kick`\n!kick {Member mention} {Reason: optional}\n\nKicks the member from the server'
         self.confessions = {}
         self.mutedict = {}
         self.startTime = int(presentTime())
@@ -308,33 +308,45 @@ class misc(commands.Cog):
         else:
             await ctx.channel.send("Lawda, I am not Dyno to let you do this")
 
-    @ commands.command(aliases=['unlock'])
-    async def _unlock_channel(self, ctx, channelObj:discord.TextChannel = None):
+    # @ commands.command(aliases=['unlock'])
+    @cog_ext.cog_slash( name="unlock",
+                        description="Unlocks the specified channel",
+                        guild_ids=[GUILD_ID],
+                        options=[
+                            create_option(
+                                name="channel",
+                                description="The channel to be unlocked",
+                                option_type=7,
+                                required=False
+                            )
+                        ]
+                      )
+    async def _unlock_channel(self, ctx, channel:discord.TextChannel = None):
         unlock_help_embed = discord.Embed(
             title="Unlock", color=0x48BF91, description=self.unlock)
         overwrites = discord.PermissionOverwrite(view_channel=False)
 
-        if(channelObj == None):
-            channelObj = ctx.channel
+        if(channel == None):
+            channel = ctx.channel
 
-        perms = channelObj.overwrites_for(ctx.guild.default_role)
+        perms = channel.overwrites_for(ctx.guild.default_role)
 
         if((self.admin in ctx.author.roles) or (self.mods in ctx.author.roles)):
             if ((perms.view_channel == False) and (perms.send_messages == False)):
-                await channelObj.set_permissions(ctx.guild.default_role, overwrite=overwrites)
+                await channel.set_permissions(ctx.guild.default_role, overwrite=overwrites)
                 unlock_embed = discord.Embed(
                     title="Channel Unlocked :unlock:", color=0x00ff00)
-                await channelObj.send(embed=unlock_embed)
+                await channel.send(embed=unlock_embed)
                 unlock_message = discord.Embed(
-                    title="", color=0x00ff00, description=f"Unlocked {channelObj.mention}")
+                    title="", color=0x00ff00, description=f"Unlocked {channel.mention}")
                 await ctx.channel.send(embed=unlock_message)
                 unlock_logs = discord.Embed(title="Unlock", color=0x00ff00)
-                unlock_logs.add_field(name="Channel", value=channelObj.mention)
+                unlock_logs.add_field(name="Channel", value=channel.mention)
                 unlock_logs.add_field(
                     name="Moderator", value=ctx.author.mention)
-                await self.client.get_channel(MOD_LOGS).send(embed=unlock_logs)
+                await self.client.get_channel(MOD_LOGS).reply(embed=unlock_logs)
             else:
-                await ctx.send("Lawda that channel is already unlocked")
+                await ctx.reply("Lawda that channel is already unlocked")
         else:
             await ctx.channel.send("Lawda, I am not dyno to let you do this")
 
@@ -452,16 +464,34 @@ class misc(commands.Cog):
         plt.close()
         os.remove('ps.jpg')
 
-    @ commands.command(aliases=['kick'])
+    # @ commands.command(aliases=['kick'])
+    @cog_ext.cog_slash( name="kick",
+                        description="Kicks the member from the server",
+                        options=[
+                            create_option(
+                                name="memb",
+                                description="Member to be kicked or members seperated by \" \"",
+                                option_type=3,
+                                required=True
+                            ),
+                            create_option(
+                                name="reason",
+                                description="The reason for kick",
+                                option_type=3,
+                                required=True
+                            )
+                        ]
+                      )
     async def _kick(self, ctx, memb, *, reason:str = ""):
         kick_help_embed = discord.Embed(
             title="Kick", color=0x48BF91, description=self.kick)
 
         if(reason == ""):
             reason = "no reason given"
-        mens = ctx.message.raw_mentions
+        mens = [int(i.replace('<', "").replace(">", "").replace("@", "")) for i in memb.split(" ")]
+
         if(len(mens) == 0):
-            await ctx.send("Mention the user and not just the name", embed=kick_help_embed)
+            await ctx.reply("Mention the user and not just the name", embed=kick_help_embed)
             return
         else:
             member = mens[0]
@@ -469,7 +499,7 @@ class misc(commands.Cog):
 
         # a small little spartan easter egg
         if ((self.bots in member.roles) and (ctx.author.id == 621677829100404746)):
-            await ctx.send("AAAAAAAAAAAAAHHHHHHHHHHHH no no no not again spartan!!! NOOOO")
+            await ctx.reply("AAAAAAAAAAAAAHHHHHHHHHHHH no no no not again spartan!!! NOOOO")
             return
 
         if((self.admin in ctx.author.roles) or (self.mods in ctx.author.roles)):
@@ -488,7 +518,7 @@ class misc(commands.Cog):
                 try:
                     await member.send(f"You were kicked from the PES'25 Batch Discord Server\n Reason: {reason}")
                 except:
-                    await ctx.send("that nonsense fellow hasn't opened his DMs only")
+                    await ctx.reply("that nonsense fellow hasn't opened his DMs only")
                 await ctx.guild.kick(member, reason=reason)
         else:
             await ctx.channel.send("Lawda, I am not dyno to let you do this")
