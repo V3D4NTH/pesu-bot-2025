@@ -43,12 +43,6 @@ class misc(commands.Cog):
         self.flush_confessions.start()
         self.load_roles()
 
-        for guild in self.client.guilds:
-            if(guild.id == 1032709443860832426):
-                for text_channel in guild.text_channels:
-                    if(text_channel.id == 1032709445324652605):
-                        self.client.bot_test = text_channel
-
     @commands.Cog.listener()
     async def on_ready(self):
         await self.client.wait_until_ready()
