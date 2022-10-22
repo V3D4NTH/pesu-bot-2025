@@ -14,6 +14,7 @@ from discord_slash.utils.manage_commands import create_option, create_choice
 from datetime import datetime, timedelta
 import pytz
 from clean import *
+import io
 IST = pytz.timezone('Asia/Kolkata')
 
 pesuID = 931592628640813177
@@ -59,11 +60,15 @@ class misc(commands.Cog):
             self.muted = get(self.guildObj.roles, id=1032709443919560834)
         except:
             pass
-    @ commands.command(aliases = ['uptime', 'ut'])
+    # @ commands.command(aliases = ['uptime', 'ut'])
+    @cog_ext.cog_slash( name="uptime",
+                        guild_ids=[GUILD_ID],
+                        description="Shows how long the bot has been online for"
+                      )
     async def _upTime(self, ctx):
         currTime = int(presentTime())
         seconds = (currTime - self.startTime)//1
-        await ctx.send("Bot uptime: `{}`".format(str(timedelta(seconds = seconds))))
+        await ctx.reply("Bot uptime: `{}`".format(str(timedelta(seconds = seconds))))
 
     @commands.command(aliases=['c', 'count'])
     async def _count(self, ctx, *, roleName:str = ''):
@@ -382,7 +387,19 @@ class misc(commands.Cog):
     #        name="Important", value="**Under no circumstances is anyone allowed to merge to the main branch.**", inline=False)
     #    await ctx.send(embed=Embeds)
 
-    @commands.command(aliases=['poll'])
+    # @commands.command(aliases=['poll'])
+    @cog_ext.cog_slash( name="poll",
+                        guild_ids=[GUILD_ID],
+                        description="Starts a poll",
+                        options=[
+                            create_option(
+                                name="msg",
+                                description="Message",
+                                option_type=3,
+                                required=False
+                            )
+                        ]
+                      )
     async def poll_command(self, ctx, *, msg: str = ''):
         poll_help = discord.Embed(title="Start a poll", color=0x2a8a96)
         poll_help.add_field(
@@ -390,7 +407,7 @@ class misc(commands.Cog):
         poll_help.add_field(
             name="\u200b", value="To get results of a poll, use `p!pollshow [message ID]`", inline=False)
         if(msg == ''):
-            await ctx.channel.send(embed=poll_help)
+            await ctx.reply(embed=poll_help)
             return
         msg_1 = msg.split('[')
         poll_list = []
@@ -400,12 +417,12 @@ class misc(commands.Cog):
                 continue
             poll_list.append(j.strip())
         if(len(poll_list) == 1):
-            await ctx.channel.send("Not enough parameters")
-            await ctx.channel.send(embed=poll_help)
+            await ctx.reply("Not enough parameters")
+            await ctx.reply(embed=poll_help)
         elif(len(poll_list) == 2):
-            await ctx.channel.send("You need more than one choice")
+            await ctx.reply("You need more than one choice")
         elif(len(poll_list) > 10):
-            await ctx.channel.send("Can't have more than nine choice")
+            await ctx.reply("Can't have more than nine choice")
         else:
             question = poll_list[0]
             options = poll_list[1:]
@@ -601,20 +618,22 @@ class misc(commands.Cog):
         else:
             await ctx.send("You are not authorised for this command")
 
-    @commands.command(aliases=['restart'])
+    # @commands.command(aliases=['restart'])
+    @cog_ext.cog_slash( name="restart",
+                        guild_ids=[GUILD_ID],
+                        description="Restarts the bot"
+                      )
     async def _restart(self, ctx):
         BOT_TEST = 1032709445324652605
         if ctx.author.id == 523340943437594624:
             await self.git_pull(ctx)
-            with open('cogs/verified.csv', 'r') as fp:
-                await self.client.get_channel(BOT_TEST).send(file=discord.File(fp, 'verified.csv'))
-            fp.close()
+            await self.client.get_channel(BOT_TEST).send(file=discord.File("cogs/verified.csv"))
             p = subprocess.Popen(['python3', 'start.py'])
             sys.exit(0)
         else:
-            await ctx.channel.send("Cuteeeeeeeeeeeeeeeeeeeeeeeeeeeee")
+            await ctx.reply("Cuteeeeeeeeeeeeeeeeeeeeeeeeeeeee")
             await asyncio.sleep(1)
-            await ctx.channel.send("**NO.**")
+            await ctx.reply("**NO.**")
 
     @commands.command(aliases=['enableconfess'])
     async def flush_slash(self, ctx):
