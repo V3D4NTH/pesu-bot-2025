@@ -68,17 +68,30 @@ class misc(commands.Cog):
     async def _upTime(self, ctx):
         currTime = int(presentTime())
         seconds = (currTime - self.startTime)//1
-        await ctx.reply("Bot uptime: `{}`".format(str(timedelta(seconds = seconds))))
+        await ctx.reply("Bot uptime: `{}`".format(str(timedelta(seconds = seconds))))   
 
-    @commands.command(aliases=['c', 'count'])
-    async def _count(self, ctx, *, roleName:str = ''):
-        roleName = roleName.split('&')
+    # @commands.command(aliases=['c', 'count'])
+    # @cog_ext.cog_slash(name="count",guild_ids=[GUILD_ID],description="Returns a number of users with specified role",options=[create_option(name="roleName",description="The role name **NOT MENTION**",option_type=3,required=True)])
+    @cog_ext.cog_slash( name="count",
+                        description="Counts the number of users with a specific",
+                        guild_ids=[GUILD_ID],
+                        options=[
+                            create_option(
+                                name="rolename",
+                                description="The channel to be unlocked",
+                                option_type=3,
+                                required=False
+                            )
+                        ]
+                      )
+    async def _count(self, ctx, rolename = ""):
+        rolename = rolename.split('&')
         temp = []
-        for i in roleName:
+        for i in rolename:
             temp.append(i.strip())
-        roleName = temp
-        await ctx.channel.send(f"Got request for role {str(roleName)}")
-        if(roleName == ['']):
+        rolename = temp
+        await ctx.reply(f"Got request for role {str(rolename)}")
+        if(rolename == ['']):
             await ctx.channel.trigger_typing()
             for guild in self.client.guilds:
                 total = len(guild.members)
@@ -115,10 +128,10 @@ class misc(commands.Cog):
                     Total number of members from EC: `{ecPeeps}`
                     Number of people that can see this channel: `{hooman}`
                     Number of bots that can see this channel: `{bots}`"""
-                await ctx.channel.send(stats)
+                await ctx.reply(stats)
         else:
             thisRole = []
-            for roles in roleName:
+            for roles in rolename:
                 thisRole.append(get(ctx.guild.roles, name=roles))
             for guild in self.client.guilds:
                 count = 0
@@ -130,7 +143,7 @@ class misc(commands.Cog):
                             boolean = False
                     if boolean:
                         count += 1
-            await ctx.channel.send(f"{str(count)} people has role {str(thisRole)}")
+            await ctx.reply(f"{str(count)} people has role {str(thisRole)}")
 
     #@commands.command(aliases=['p', 'purge'])
     #async def _clear(self, ctx, amt=0):
