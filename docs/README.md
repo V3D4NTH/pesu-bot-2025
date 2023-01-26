@@ -29,5 +29,4 @@ Then, run the bot by using the following command:
 
 `python3 bot.py`
 
-## Owner and Maintainer
-[alfadelta10010](https://github.com/alfadelta10010)
+
